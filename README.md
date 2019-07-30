@@ -1,29 +1,11 @@
-# cute
+# **Cute** 
 
-## Project setup
-```
-npm install
-```
+### Cute is a personal project I made using vue-router. It's a website where you can browse for cute pics of funny things. :)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+PS: I know there are plenty of those, but i guarantee none of them are as cute as mine! 
 
-### Compiles and minifies for production
-```
-npm run build
-```
+**Developer**: Adrian Visnieski.
 
-### Run your tests
-```
-npm run test
-```
+**Contact**:adrianivsdk@gmail.com
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+**LinkedIn**: [Adrian](https://www.linkedin.com/in/adrian-visnieski-09967a174/).
