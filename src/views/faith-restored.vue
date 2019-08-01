@@ -1,12 +1,17 @@
 <template>
   <div class="faith-restored">
-    <h1>THIS IS FAITH RESTORED</h1>
-    <div id="nav navbar">
-      <router-link to="/#">CUTE</router-link> |
-      <router-link to="/aww">aww</router-link>
-      <router-link to="/faith-restored">faith restored</router-link>
-      <router-link to="/me-irl">me irl</router-link>
-      <router-link to="/login">login</router-link>
-    </div>
+    <navbar></navbar>
   </div>
 </template>
+
+<script>
+// @ is an alias to /src
+import navbar from "@/components/navbar.vue";
+
+export default {
+  name: "faith-restored",
+  components: {
+    navbar
+  }
+};
+</script>
