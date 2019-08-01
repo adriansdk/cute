@@ -1,19 +1,21 @@
 <template>
   <div class="home">
     <navbar></navbar>
-    <header></header>
+    <firstSection></firstSection>
+    <secondSection></secondSection>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import navbar from "@/components/navbar.vue";
-import header from "@/components/header.vue";
+import firstSection from "@/components/firstSection.vue";
+import secondSection from "@/components/secondSection.vue";
 
 export default {
   name: "home",
   components: {
-    navbar, header,
+    navbar, firstSection, secondSection
   }
 };
 </script>

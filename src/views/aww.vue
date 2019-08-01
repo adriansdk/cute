@@ -2,6 +2,7 @@
   <div class="aww">
     <navbar></navbar>
     <h1>EYASK</h1>
+    <header></header>
   </div>
 </template>
 
