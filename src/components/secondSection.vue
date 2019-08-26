@@ -44,9 +44,13 @@
 <style scoped lang="css">
 .secondSection {
   background-color: #ff3;
-  height: 350px;
+  height: 700px;
   z-index: 100;
   position: relative;
+  clip-path: polygon(3% 3%, 92% 12%, 100% 70%, 1% 84%);
+
+
+
 }
 .secondSection .container {
   /* background-image: url("https://i.imgur.com/q4MZUdT.png");
@@ -65,7 +69,7 @@
   text-shadow: rgb(53, 37, 50) 2px 2px;
   font-weight: bolder;
   font-size: 50px;
-  padding-top: 30px;
+  padding-top: 80px;
   margin-bottom: 10px;
   text-decoration: underline;
   text-underline-position: under;
