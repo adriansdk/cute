@@ -2,7 +2,7 @@
   <div class="firstSection">
     <div class="container-fluid d-flex">
       <div class="text d-flex flex-wrap">
-        <h1>End my misery!</h1>
+       <h1 id="rainbow">End my misery!</h1>
         <h3 >If you can't be bothered trying anymore, this is the perfect place to be. We'll help you relax with some cute fluffy faces!</h3>
         <button class="btn">Start out!</button>
       </div>
@@ -15,8 +15,7 @@
     name: 'firstSection',
     props: [],
     mounted() {
-
-    },
+      },
     data() {
       return {
 
@@ -32,13 +31,11 @@
 </script>
 
 <style scoped lang="css">
-
 .firstSection {
   height: 320px;
   color: white;
   background-color: #265573;
 }
-
 
 .firstSection img {
   height: 320px;
@@ -51,8 +48,10 @@
   font-weight: bolder;
   font-size: 40px;
   padding-top: 30px;
-  text-shadow: black 2px;
+  padding-bottom: 5px;
+  text-shadow: black 2px 2px;
   text-decoration: underline;
+  text-underline-position: under;
 }
 
 .firstSection h3 {
