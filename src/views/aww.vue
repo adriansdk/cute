@@ -1,19 +1,22 @@
 <template>
   <div class="aww">
     <navbar></navbar>
-    <h1>EYASK</h1>
-    <header></header>
+    <game></game>
+    <myFooter></myFooter>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import navbar from "@/components/navbar.vue";
+import game from "@/components/game.vue";
+import myFooter from "@/components/myFooter.vue";
+
 
 export default {
   name: "aww",
   components: {
-    navbar
+    navbar, game, myFooter
   }
 };
 </script>

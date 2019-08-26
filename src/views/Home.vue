@@ -19,7 +19,7 @@ import myFooter from "@/components/myFooter.vue"
 export default {
   name: "home",
   components: {
-    navbar, firstSection, secondSection, thirdSection, myFooter
+    navbar, firstSection, secondSection, thirdSection, myFooter,
   }
 };
 </script>
