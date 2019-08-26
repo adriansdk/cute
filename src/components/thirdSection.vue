@@ -1,17 +1,19 @@
 <template lang="html">
 
   <section class="third-section">
-    <div class="container">
-      <h1 class="text-align-center">API's Used</h1>
+    <div class="container flex">
+      <div class="row">
+        <h1 class="text-align-center">Choose your figther</h1>
+      </div>
       <div class="row">
         <div class="col">
           <div class="card">
-            <h1>The Dog API</h1>
+            <button v-on:click="loadDogImage()">The Dog API</button>
           </div> 
         </div>
         <div class="col">
           <div class="card">
-            <h1>The Cat API</h1>
+            <button v-on:click="loadCatImage()">The Cat API</button>
           </div>
         </div>
       </div>
@@ -34,20 +36,64 @@
       }
     },
     methods: {
+      async loadCatImage()
+            {
+                try{
+                    axios.defaults.headers.common['x-api-key'] = "7c37ab62-1cd4-4797-a6e5-1138a4581a9c" // Replace this with your API Key
+                    let response = await axios.get('https://api.thecatapi.com/v1/images/search', { params: { limit:1, size:"full" } } ) // Ask for 1 Image, at full resolution
+                    
+                    this.image = response.data[0] // the response is an Array, so just use the first item as the Image
+                    console.log("-- Image from TheCatAPI.com")
+                    console.log("id:", this.image.id)
+                    console.log("url:", this.image.url)
+                }catch(err){
+                    console.log(err)
+                }
+            },
 
-    },
+      async loadDogImage()
+          {
+              try{
+                  let response = await axios.get('https://dog.ceo/api/breeds/image/random', { params: { limit:1, size:"full" } } ) 
+                  console.log(response)
+                  console.log("url:", response.data.message)
+                  console.log("status", response.data.status)
+              }catch(err){
+                  console.log(err)
+              }
+          }
+        },
+        
+
+    };
     computed: {
 
     }
-}
+
 </script>
 
 <style scoped lang="css">
-  .third-section {
-    height:500px;
-    background-image: url("../assets/adam2.jpg");
-    background-position: center;
-    background-repeat:no-repeat;
-    background-size:length 1000px 600px;
-  }
+.third-section {
+  height: 400px;
+  width: auto;
+  background-image: url("../assets/adam2.jpg"),
+    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 90%;
+}
+
+h1{
+  color: #fff;
+  text-shadow: black 3px 3px;
+  font-weight: bolder;
+  font-size: 50px;
+  padding-top: 15px;
+  text-decoration: underline;
+  text-underline-position: under;
+}
+
+.container{
+  width: 95%;
+}
 </style>

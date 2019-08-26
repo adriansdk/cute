@@ -7,7 +7,7 @@
           <h3 >If you can't be bothered trying anymore, this is the perfect place to be. We'll help you relax with some cute fluffy faces!</h3>
           <button class="btn">Start out!</button>
         </div>
-        <div class="col d-none d-md-flex justify-content-end">
+        <div class="col d-none d-lg-flex justify-content-end">
           <img src="../assets/jobs.png">
         </div>
       </div>
