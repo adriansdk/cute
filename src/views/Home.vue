@@ -1,9 +1,9 @@
 <template>
-  <div class="home col">
-    <navbar class="row"></navbar>
-    <firstSection class="row"></firstSection>
-    <secondSection class="row"></secondSection>
-    <thirdSection class="row"></thirdSection>
+  <div class="home">
+    <navbar></navbar>
+    <firstSection></firstSection>
+    <secondSection></secondSection>
+    <thirdSection></thirdSection>
   </div>
 </template>
 

@@ -1,11 +1,15 @@
 <template lang="html">
   <div class="firstSection container-fluid">
-  <div class="text">
-    <h1 class="transition">End my misery!</h1>
-    <h3 class="transition">If you can't be bothered trying anymore, this is the perfect place to be. We'll help you relax with some cute fluffy faces!</h3>
-    <button class="btn">Start out!</button>
-    <img src="../assets/jobs.png">
-  </div>
+    <div class="theRow row">
+      <div class="text col-6">
+        <h1 class="transition">End my misery!</h1>
+        <h3 class="transition">If you can't be bothered trying anymore, this is the perfect place to be. We'll help you relax with some cute fluffy faces!</h3>
+        <button class="btn">Start out!</button>
+      </div>
+      <div class="col-6">
+        <img src="../assets/jobs.png">
+      </div>
+      </div>
   </div>
 </template>
 
@@ -40,22 +44,18 @@ body {
   color: white;
 }
 
-.firstSection img {
-  height: 400px;
-  width: 400px;
-  position: absolute;
-  left: 50%;
-  right: 50%;
-  top: 9%;
+.theRow {
+  height: 430px;
+}
 
+.firstSection img {
+  height: 200px;
+  width: 200px;
   filter: grayscale(100%);
 }
 
 .text {
-  margin-left: 350px;
-  padding-top: 110px;
-  padding-right: 20%;
-  filter: grayscale(0%);
+
 }
 
 .firstSection h1 {
