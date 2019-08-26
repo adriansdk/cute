@@ -45,7 +45,7 @@
 
   .secondSection {
     background-color: #ff3;
-    height: 400px;
+    height: 430px;
   }
   .secondSection .container {
     background-image: url("https://i.imgur.com/q4MZUdT.png");

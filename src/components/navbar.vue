@@ -41,23 +41,30 @@ export default {
 .navbar{
   background-color:#EE76A5;
   width: 100%;
+  height: 55px;
 }
 
 .navbar .navbar-brand, .nav-link{
-  margin: auto 0px auto 15px;
+  margin: auto 0px auto 10  px;
+}
+
+.navbar .navbar-brand{
+  font-size: 28px;
+  margin-left:20px;
 }
 
 .navbar a{
   color:white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 24px;
   white-space: nowrap;
 }
 
 .navbar a:hover{
   color:aqua;
   text-shadow: black 2px 2px;
+  transition: color 1s;
 }
 
 .navbar-toggler-icon{
