@@ -1,6 +1,6 @@
 <template>
   <div class="myNav">
-    <nav class="navbar navbar-expand-lg sticky-top">
+    <nav class="navbar navbar-expand-lg sticky-top d-flex aling-items-center">
       <router-link to="/" class="navbar-brand">CUTE</router-link>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarLinks" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -45,12 +45,12 @@ export default {
 }
 
 .navbar .navbar-brand, .nav-link{
-  margin: auto 0px auto 10  px;
+  margin: 0px;
+  padding: 0px 15px;
 }
 
 .navbar .navbar-brand{
   font-size: 28px;
-  margin-left:20px;
 }
 
 .navbar a{
