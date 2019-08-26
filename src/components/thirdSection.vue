@@ -2,7 +2,7 @@
 
   <section class="third-section">
     <div class="container">
-      <h1 class="text-left">ayy</h1>   
+      <h1 class="text-left link"><router-link to="/aww" class="nav-link">Cats vs Dogs</router-link></h1>   
     </div>
   </section>
 
@@ -39,10 +39,10 @@
     linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 90%;
+  background-size: 75% auto;
 }
 
-h1{
+.link a{
   color: #fff;
   text-shadow: black 3px 3px;
   font-weight: bolder;
@@ -52,8 +52,8 @@ h1{
   text-underline-position: under;
 }
 
-h1:hover{
-
+.link a:hover{
+  color: #ee76a5;
 }
 
 p{
@@ -64,6 +64,6 @@ p{
 }
 
 .container{
-  width: 60%;
+  width: 95%;
 }
 </style>
