@@ -47,7 +47,7 @@
 
 .firstSection img {
   height: 400px;
-  width: 100%;
+  width: auto;
   filter: grayscale(100%);
   margin-top: 70px;
   transition: filter 1s, margin-top 1s;

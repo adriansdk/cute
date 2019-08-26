@@ -1,19 +1,19 @@
 <template>
   <div class="me-irl">
     <navbar></navbar>
-    <customButton></customButton>
+    <myFooter></myFooter>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import navbar from "@/components/navbar.vue";
-import customButton from "@/components/customButton.vue";
+import myFooter from "@/components/myFooter.vue";
 
 export default {
   name: "me-irl",
   components: {
-    navbar, customButton
+    navbar, myFooter
   }
 };
 </script>

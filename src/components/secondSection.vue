@@ -2,10 +2,18 @@
 
   <section class="secondSection">
     <div class="container">
-      <div class="text">
+    <div class="row">
+      <div class="text col-6">
+        <div class="row">
         <h1>Having a tough day?</h1>
         <h3>We all know that the toughest days require the cutest of cats. Check out our collection of extremely cute cats to get you trough the day</h3>
-        <button class="btn customButton">Make me happy!</button>
+        <button class="btn myFooter">Make me happy!</button>
+        </div>
+        <img class="row" src="../assets/calopsita.png">
+      </div>
+      <div class="col">
+        <img src="../assets/gato.png"
+      </div>
       </div>
     </div>
   </section>
@@ -14,13 +22,13 @@
 
 <script lang="js">
 
-  import customButton from "@/components/customButton.vue"
+  import myFooter from "@/components/myFooter.vue"
 
 
   export default  {
     name: 'secondSection',
     components: {
-      customButton,
+      myFooter,
     },
 
     props: [],
@@ -47,16 +55,11 @@
   height: 700px;
   z-index: 100;
   position: relative;
-  clip-path: polygon(3% 3%, 92% 12%, 100% 70%, 1% 84%);
-
+  clip-path: polygon(3% 3%, 92% 12%, 100% 85%, 0 100%);
 
 
 }
 .secondSection .container {
-  /* background-image: url("https://i.imgur.com/q4MZUdT.png");
-    background-repeat: no-repeat;
-    background-position: right center;
-    height: 400px; */
   width: 95%;
 }
 
@@ -99,5 +102,12 @@
   border: white 1px solid;
   border-bottom: 0px;
   border-right: 0px;
+}
+
+img{
+  padding-top: 20px;
+  height: 400px;
+  width: auto;
+  float: left;
 }
 </style>

@@ -1,7 +1,22 @@
 <template lang="html">
 
   <section class="third-section">
-    <h1>third-section Component</h1>
+    <div class="container">
+      <h1 class="text-align-center">API's Used</h1>
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <h1>The Dog API</h1>
+          </div> 
+        </div>
+        <div class="col">
+          <div class="card">
+            <h1>The Cat API</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    
   </section>
 
 </template>
