@@ -4,17 +4,33 @@
       <div class="row">
         <div class="col stats text-align-center">
           <div class="card">
-            <img :src="cat.url">
+            <img v-on:click="betOnCat()" :src="cat.url">
           </div>
-            <h1> Damage:{{ cat.damage }} </h1>
-            <h1> Defense: {{ cat.defense }} </h1>
-            <h1> HP: {{ cat.hp }} </h1>
+            <h1  v-bind:class="{ show: !isPlaying }"> Love:{{ cat.damage }} </h1>
+            <h1  v-bind:class="{ show: !isPlaying }"> Fear: {{ cat.defense }} </h1>
+            <h1  v-bind:class="{ show: !isPlaying }"> Energy: {{ cat.hp }} </h1>
+            <h1  v-bind:class="{ show: !isPlaying }"> Attack Speed: {{ cat.speed/1000 }} </h1>
         </div>
         <div class="col-3 text-center" v-bind:class="{ show: isPlaying }">
-          <h1><router-link to="/aww" class="nav-link">Cats vs Dogs</router-link></h1>
-          <p > Ever wanted to make cats and dogs fight? Yeah, me neither, but here you can do it without hurting any Cute beings! <br>BET ON ONE!</p>
-          <button class="btn" v-on:click="generateCat(), betOnCat()">I'll go with Cats!</button>  
-          <button class="btn" v-on:click="generateDog(), betOnDog()">Dogs probably stronger</button>
+          <div class="container col">
+            <div class="row d-flex justify-content-center">
+              <h1><router-link to="/aww" class="nav-link">CATS VS DOGS</router-link></h1>
+              <p>Ever wanted to make cats and dogs fight? Yeah, me neither, That's why in this website you make them LOVE each other until they run out of energy!</p>
+            </div>
+            <div class="row">
+              <button class="btn" id="startBtn" v-on:click="generateCat(),generateDog()">I WANNA DO THAT!</button>
+            </div>
+            <div class="row d-flex justify-space-between">
+              <button class="btn col halfBtn" v-on:click="betOnCat()">Cats!</button>  
+              <button class="btn col halfBtn" v-on:click="betOnDog()">I'm a dog person</button>
+            </div>
+            <div class="row">
+              <button class="btn" v-on:click="battle()">Time to love!</button>
+            </div>
+            <div class="row">
+              
+            </div>
+          </div>
         </div>
           <div class="playerStats col-3" v-bind:class="{ show: !isPlaying }"> 
             <p> Gold: {{ player.gold }} </p>
@@ -26,9 +42,12 @@
           <div class="card">
             <img :src="dog.url">
           </div> 
-            <h1> Damage:{{ dog.damage }} </h1>
-            <h1> Defense: {{ dog.defense }} </h1>
-            <h1> HP: {{ dog.hp }} </h1>
+          <div>
+            <h1  v-bind:class="{ show: !isPlaying }"> Love:{{ dog.damage }} </h1>
+            <h1  v-bind:class="{ show: !isPlaying }"> Fear: {{ dog.defense }} </h1>
+            <h1  v-bind:class="{ show: !isPlaying }"> Energy: {{ dog.hp }} </h1>
+            <h1  v-bind:class="{ show: !isPlaying }"> Attack Speed: {{ dog.speed/1000 }} </h1>
+            </div>
         </div>
       </div>
   </section>
@@ -46,16 +65,20 @@
       return {
         isPlaying: false,
         cat: {
-          url:"../cat2.png",
-          damage: [1,2,3,4,5,6,7,8,9,10],
+          url:'http://pngimg.com/uploads/cat/cat_PNG50503.png',
+          damage: [6,7,8,9,10,11,12,13,14,15],
           defense: [1,2,3,4,5,6],
-          hp: [30, 40, 50],
+          hp: [30,35, 40, 45, 50, 55, 60, 65, 70],
+          speed: [1200, 1150, 1100, 1050, 1150, 1000, 950, 900],
+          picked:false,
         },
         dog: {
-          url:"../dog2.png",
-          damage: [1,2,3,4,5,6,7,8,9,10],
+          url:'http://pngimg.com/uploads/dog/dog_PNG50411.png',
+          damage: [6,7,8,9,10,11,12,13,14,15],
           defense: [1,2,3,4,5,6],
-          hp: [30, 40, 50],
+          hp: [30, 35, 40, 45, 50, 55, 60, 65, 70],
+          speed: [1200, 1150, 1100, 1050, 1150, 1000, 950, 900],
+          picked:false,
         },
         player:{
           gold: 10,
@@ -63,27 +86,66 @@
           defeats: 0,
           draws: 0,
         },
-         
+        endedBattle: true,
+        winner: false,
       }
     },
-    methods: {
-
-      battle: function(){
-        if (this.cat.hp > 0 && this.dog.hp > 0){
-          catDamage = this.cat.damage - this.dog.defense
-          this.dog.hp -= catDamage
-          dogDamage = this.dog.damage - this.cat.defense
-          this.cat.hp -= dogDamage
-        }
+    watch: {
       
+    },
+
+    methods: {
+      battleEnd:function(){
+        this.endedBattle = true
+        clearInterval(this.catI)
+        clearInterval(this.dogI)
       },
 
+      battle: function(){
+        let catSpeed = this.cat.speed
+        let dogSpeed = this.dog.speed
+        console.log(catSpeed, this.cat.speed, dogSpeed, this.dog.speed)
+        this.catI = setInterval(this.catAttack, catSpeed);
+        this.dogI = setInterval(this.dogAttack, dogSpeed);
+      },
+
+      catAttack: function(){
+        console.log('cat')
+          if (this.cat.hp > 0 && this.dog.hp > 0){
+            let catDamage = this.cat.damage - this.dog.defense
+            this.dog.hp -= catDamage
+            if(this.dog.hp <= 0){
+              this.endedBattle = true
+              this.dog.hp = 0
+              this.player.gold += 10
+              this.battleEnd()
+            }
+          }
+       },
+          
+      dogAttack: function(){
+        console.log('dog')
+          if (this.dog.hp > 0 && this.cat.hp > 0){
+            let dogDamage = this.dog.damage - this.cat.defense
+            this.cat.hp -= dogDamage
+            if(this.cat.hp <= 0){
+              this.endedBattle = true
+              this.cat.hp = 0
+              this.player.gold += 10
+              this.battleEnd()
+            }
+          }
+        },
+          
        betOnCat: function(){
         this.player.gold -= 5
+        this.cat.picked = true
       },
 
        betOnDog: function(){
-        this.player.gold -= 5        
+         this.player.gold -= 5        
+        this.dog.picked = true
+        this.endedBattle = false
       },
 
       async generateCat(){
@@ -103,14 +165,16 @@
                 let randomDmg = this.cat.damage[Math.floor(Math.random() * this.cat.damage.length)];
                 let randomDefense = this.cat.defense[Math.floor(Math.random() * this.cat.defense.length)]
                 let randomHp = this.cat.hp[Math.floor(Math.random() * this.cat.hp.length)]
+                let randomSpeed = this.cat.speed[Math.floor(Math.random() * this.cat.speed.length)]
                 this.cat.damage = randomDmg
                 this.cat.defense =  randomDefense
                 this.cat.hp = randomHp
+                this.cat.speed = randomSpeed
             },
 
       async generateDog(){
         try{
-
+          
           
           let response = await axios.get('https://dog.ceo/api/breeds/image/random', { params: { limit:1, size:"500px 500px" } });  
                   console.log(response)
@@ -124,9 +188,11 @@
                 let randomDmg = this.dog.damage[Math.floor(Math.random() * this.dog.damage.length)];
                 let randomDefense = this.dog.defense[Math.floor(Math.random() * this.dog.defense.length)]
                 let randomHp = this.dog.hp[Math.floor(Math.random() * this.dog.hp.length)]
+                let randomSpeed = this.dog.speed[Math.floor(Math.random() * this.dog.speed.length)]
                 this.dog.damage = randomDmg
                 this.dog.defense =  randomDefense
                 this.dog.hp = randomHp
+                this.dog.speed = randomSpeed
           }
         },
         
@@ -140,24 +206,25 @@
 
 <style scoped lang="css">
 .game {
-  height: 670px;
+  height: 750px;
   width: auto;
   margin-top: 55px;
   padding-top: 10px;
-  background-image: url("https://i.pinimg.com/originals/a5/3c/bd/a53cbdcf2d279bfb89747fdbdbbe65d0.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("https://i.pinimg.com/originals/a5/3c/bd/a53cbdcf2d279bfb89747fdbdbbe65d0.jpg");
   background-size: cover;
 }
 
 .card{
   margin-top: 20px;
-  height: 500px;
-  width: 100%;
-  border: 5px solid #ee76a5;
+  height: 380px;
+  width: 80%;
+  background-color: transparent;
+  border: 0px;
 }
 .btn {
   color: #fff;
   background-color: #ee76a5;
-  width: 50%;
+  width: 100%;
   padding: 5px 0px;
   font-size: 25px;
   font-weight: bold;
@@ -165,18 +232,25 @@
   text-shadow: black 1.5px 1.5px;
   border: 0px;
   margin-top: 5px;
+  border:2px white solid;
 }
 
 .stats{
   font-size: 18px;
   padding-top: 15px;
   padding-bottom: 15px;
-  color: black;
+  color: #fff;
+  text-shadow: black 3px 3px;
+  font-weight: bolder;
 }
 
 .btn:hover {
   border-bottom: 0px;
   border-right: 0px;
+}
+
+.halfBtn{
+  width: 35%;
 }
 
 a {
@@ -204,13 +278,11 @@ a:hover {
 }
 
 p {
+  color: #fff;
+  text-shadow: black 3px 3px;
+  font-weight: bolder;
   font-size: 30px;
   padding-top: 15px;
-  padding-bottom: 15px;
-  color: black;
-  text-shadow: white 2px 2px;
-  font-weight: bold;
-  text-align: center;
 }
 
 .card img{
