@@ -72,6 +72,7 @@
           speed: [1200, 1150, 1100, 1050, 1150, 1000, 950, 900],
           picked:false,
         },
+
         dog: {
           url:'http://pngimg.com/uploads/dog/dog_PNG50411.png',
           damage: [6,7,8,9,10,11,12,13,14,15],
@@ -80,6 +81,7 @@
           speed: [1200, 1150, 1100, 1050, 1150, 1000, 950, 900],
           picked:false,
         },
+
         player:{
           gold: 10,
           victories: 0,
@@ -88,6 +90,13 @@
         },
         endedBattle: true,
         winner: false,
+        dead : {
+          url : "sounds/dead.wav"
+        },
+        ping : {
+          url : "sounds/ping.mp3",
+          volume : .5
+        }
       }
     },
     watch: {
@@ -147,6 +156,7 @@
         this.dog.picked = true
         this.endedBattle = false
       },
+      
 
       async generateCat(){
                 try{
