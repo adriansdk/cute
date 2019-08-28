@@ -6,12 +6,12 @@
           <div class="card">
             <img v-on:click="betOnCat()" :src="cat.url">
           </div>
-            <h1  v-bind:class="{ show: !isPlaying }"> Love:{{ cat.damage }} </h1>
-            <h1  v-bind:class="{ show: !isPlaying }"> Fear: {{ cat.defense }} </h1>
-            <h1  v-bind:class="{ show: !isPlaying }"> Energy: {{ cat.hp }} </h1>
-            <h1  v-bind:class="{ show: !isPlaying }"> Attack Speed: {{ cat.speed/1000 }} </h1>
+            <p  v-bind:class="{ show: !isPlaying }"> <i class="fas fa-heart"></i> Love:{{ cat.damage }} </p>
+            <p  v-bind:class="{ show: !isPlaying }"><i class="fas fa-flushed"></i> Fear: {{ cat.defense }} </p>
+            <p  v-bind:class="{ show: !isPlaying }"><i class="fas fa-battery-full"></i> Energy: {{ cat.hp }} </p>
+            <p  v-bind:class="{ show: !isPlaying }"><i class="fas fa-tachometer-alt"></i> Attack Speed: {{ cat.speed/1000 }} </p>
         </div>
-        <div class="col-3 text-center" >
+        <div class="col-4 text-center">
           <div class="container col">
             <div class="row d-flex justify-content-center">
               <h1><router-link to="/aww" class="nav-link">CATS VS DOGS</router-link></h1>
@@ -22,22 +22,22 @@
               <button class="btn" id="startBtn" v-bind:class="{ show: isPlaying }" v-on:click="generateCat(),generateDog()">I WANNA DO THAT!</button>
             </div>
             <div class="row d-flex justify-space-between">
-              <button class="btn col halfBtn" v-on:click="betOnCat()" v-bind:class="{ show: !isPlaying }">Cats!</button>  
-              <button class="btn col halfBtn" v-on:click="betOnDog()" v-bind:class="{ show: !isPlaying }">I'm a dog person</button>
+              <button class="btn col halfBtn show" v-on:click="betOnCat()" v-bind:class="{ choosing: choosing }">Cats!</button>  
+              <button class="btn col halfBtn show" v-on:click="betOnDog()" v-bind:class="{ choosing: choosing }">I'm a dog person</button>
             </div>
             <div class="row">
-              <button class="btn" v-on:click="battle()" v-bind:class="{ show: !ready }">Time to love!</button>
+              <button class="btn" v-on:click="battle()" v-bind:class="{ show: !ready }">{{ startMsg }}</button>
             </div>
             <div class="row">
               
             </div>
           </div>
           <div class="playerStats col" v-bind:class="{ show: !isPlaying }"> 
-            <div class="row">
+            <div class="row text-align-center">
               <p> Gold: {{ player.gold }} </p>
               <p> Victories: {{ player.victories }} </p>
             </div>
-            <div class="row">
+            <div class="row text-align-right">
               <p> Defeats: {{ player.defeats }} </p>
               <p> Draws: {{ player.draws }} </p>
             </div>           
@@ -48,10 +48,10 @@
             <img :src="dog.url">
           </div> 
           <div>
-            <h1  v-bind:class="{ show: !isPlaying }"> Love:{{ dog.damage }} </h1>
-            <h1  v-bind:class="{ show: !isPlaying }"> Fear: {{ dog.defense }} </h1>
-            <h1  v-bind:class="{ show: !isPlaying }"> Energy: {{ dog.hp }} </h1>
-            <h1  v-bind:class="{ show: !isPlaying }"> Attack Speed: {{ dog.speed/1000 }} </h1>
+            <p v-bind:class="{ show: !isPlaying }"> <i class="fas fa-heart"></i> Love:{{ dog.damage }} </p>
+            <p v-bind:class="{ show: !isPlaying }"> <i class="fas fa-flushed"></i> Fear: {{ dog.defense }} </p>
+            <p v-bind:class="{ show: !isPlaying }"> <i class="fas fa-battery-full"></i> Energy: {{ dog.hp }} </p>
+            <p v-bind:class="{ show: !isPlaying }"> <i class="fas fa-tachometer-alt"></i> Attack Speed: {{ dog.speed/1000 }} </p>
             </div>
         </div>
       </div>
@@ -97,10 +97,14 @@
           defeats: 0,
           draws: 0,
         },
+        ready: false,
         endedBattle: true,
         winner: false,
         inGame:false,
-        ready: false,
+        choosing: false,
+        bet: '',
+        start:['Time to Love!', 'Love again!'],
+        startMsg: 'Time to Love!',
       }
     },
     methods: {
@@ -108,11 +112,24 @@
         this.endedBattle = true
         clearInterval(this.catI)
         clearInterval(this.dogI)
+        this.startMsg = this.start[1]
+        if(this.cat.hp > this.dog.hp && this.bet == 'cat'){
+          this.player.gold += 10
+          this.player.victories += 1
+        }else if (this.dog.hp > this.cat.hp && this.bet == 'dog'){
+          this.player.gold += 10
+          this.player.victories += 1
+        } else if (this.cat.hp > this.dog.hp && this.bet == 'dog'){
+          this.player.defeats += 1
+        } else if (this.cat.hp > this.dog.hp && this.bet == 'dog'){
+          this.player.defeats += 1
+        } else {this.player.draws += 1}
       },
 
       battle: function(){
         let catSpeed = this.cat.speed
         let dogSpeed = this.dog.speed
+        this.startMsg = this.start[0]
         console.log(catSpeed, this.cat.speed, dogSpeed, this.dog.speed)
         this.catI = setInterval(this.catAttack, catSpeed);
         this.dogI = setInterval(this.dogAttack, dogSpeed);
@@ -128,7 +145,6 @@
             if(this.dog.hp <= 0){
               this.endedBattle = true
               this.dog.hp = 0
-              this.player.gold += 10
               this.battleEnd()
             }
           }
@@ -142,7 +158,6 @@
             if(this.cat.hp <= 0){
               this.endedBattle = true
               this.cat.hp = 0
-              this.player.gold += 10
               this.battleEnd()
             }
           }
@@ -150,16 +165,18 @@
           
        betOnCat: function(){
         this.player.gold -= 5
-        this.cat.picked = true
         this.ready = true
+        this.choosing = false
+        this.endedBattle = false
+        this.bet = 'cat'
       },
 
        betOnDog: function(){
-         this.player.gold -= 5        
-        this.dog.picked = true
+        this.player.gold -= 5        
         this.endedBattle = false
         this.ready = true
-        
+        this.choosing = false        
+        this.bet = 'dog'
       },
       
 
@@ -178,6 +195,7 @@
                 }
                 this.isPlaying = true
                 this.inGame = true
+                this.choosing = true
                 let randomDmg = this.cat.damage[Math.floor(Math.random() * this.cat.damage.length)];
                 let randomDefense = this.cat.defense[Math.floor(Math.random() * this.cat.defense.length)]
                 let randomHp = this.cat.hp[Math.floor(Math.random() * this.cat.hp.length)]
@@ -202,6 +220,7 @@
               }
                 this.isPlaying = true
                 this.inGame = true
+                this.choosing = true
                 let randomDmg = this.dog.damage[Math.floor(Math.random() * this.dog.damage.length)];
                 let randomDefense = this.dog.defense[Math.floor(Math.random() * this.dog.defense.length)]
                 let randomHp = this.dog.hp[Math.floor(Math.random() * this.dog.hp.length)]
@@ -254,8 +273,7 @@
 
 .stats{
   font-size: 18px;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding: 0px 15px 10px;
   color: #fff;
   text-shadow: black 3px 3px;
   font-weight: bolder;
@@ -267,7 +285,8 @@
 }
 
 .halfBtn{
-  width: 35%;
+
+  width: 100%;
 }
 
 a {
@@ -296,12 +315,17 @@ a:hover {
   padding-top: 15px;
 }
 
+.fas{
+  color: #ee76a5;
+  font-size: 30px;
+}
+
 p {
   color: #fff;
   text-shadow: black 3px 3px;
   font-weight: bolder;
-  font-size: 30px;
-  padding-top: 15px;
+  font-size: 28px;
+  margin: 0px;
 }
 
 .card img{
@@ -311,5 +335,9 @@ p {
 
 .show {
   display: none;
+}
+
+.choosing{
+  display: initial;
 }
 </style>
