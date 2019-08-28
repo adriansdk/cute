@@ -11,33 +11,38 @@
             <h1  v-bind:class="{ show: !isPlaying }"> Energy: {{ cat.hp }} </h1>
             <h1  v-bind:class="{ show: !isPlaying }"> Attack Speed: {{ cat.speed/1000 }} </h1>
         </div>
-        <div class="col-3 text-center" v-bind:class="{ show: isPlaying }">
+        <div class="col-3 text-center" >
           <div class="container col">
             <div class="row d-flex justify-content-center">
               <h1><router-link to="/aww" class="nav-link">CATS VS DOGS</router-link></h1>
-              <p>Ever wanted to make cats and dogs fight? Yeah, me neither, That's why in this website you make them LOVE each other until they run out of energy!</p>
+              <p v-bind:class="{ show: inGame }">Ever wanted to make cats and dogs fight? Yeah, me neither, That's why in this website you make them LOVE each other until they run out of energy!</p>
+              <p v-bind:class="{ show: !isPlaying }">Who do you think will love each other more?</p>
             </div>
             <div class="row">
-              <button class="btn" id="startBtn" v-on:click="generateCat(),generateDog()">I WANNA DO THAT!</button>
+              <button class="btn" id="startBtn" v-bind:class="{ show: isPlaying }" v-on:click="generateCat(),generateDog()">I WANNA DO THAT!</button>
             </div>
             <div class="row d-flex justify-space-between">
-              <button class="btn col halfBtn" v-on:click="betOnCat()">Cats!</button>  
-              <button class="btn col halfBtn" v-on:click="betOnDog()">I'm a dog person</button>
+              <button class="btn col halfBtn" v-on:click="betOnCat()" v-bind:class="{ show: !isPlaying }">Cats!</button>  
+              <button class="btn col halfBtn" v-on:click="betOnDog()" v-bind:class="{ show: !isPlaying }">I'm a dog person</button>
             </div>
             <div class="row">
-              <button class="btn" v-on:click="battle()">Time to love!</button>
+              <button class="btn" v-on:click="battle()" v-bind:class="{ show: !ready }">Time to love!</button>
             </div>
             <div class="row">
               
             </div>
           </div>
-        </div>
-          <div class="playerStats col-3" v-bind:class="{ show: !isPlaying }"> 
-            <p> Gold: {{ player.gold }} </p>
-            <p> Victories: {{ player.victories }} </p>
-            <p> Defeats: {{ player.defeats }} </p>
-            <p> Draws: {{ player.draws }} </p>
+          <div class="playerStats col" v-bind:class="{ show: !isPlaying }"> 
+            <div class="row">
+              <p> Gold: {{ player.gold }} </p>
+              <p> Victories: {{ player.victories }} </p>
+            </div>
+            <div class="row">
+              <p> Defeats: {{ player.defeats }} </p>
+              <p> Draws: {{ player.draws }} </p>
+            </div>           
           </div>
+        </div>
         <div class="col stats">
           <div class="card">
             <img :src="dog.url">
@@ -59,7 +64,9 @@
     name: 'game',
     props: [],
     mounted() {
-
+      
+      // var catSound = new Audio('./assets/sound/bark.wav') // path to file
+      // catSound.play() 
     },
     data() {
       return {
@@ -71,6 +78,7 @@
           hp: [30,35, 40, 45, 50, 55, 60, 65, 70],
           speed: [1200, 1150, 1100, 1050, 1150, 1000, 950, 900],
           picked:false,
+          sound: "./assets/sound/meow.wav",
         },
 
         dog: {
@@ -80,6 +88,7 @@
           hp: [30, 35, 40, 45, 50, 55, 60, 65, 70],
           speed: [1200, 1150, 1100, 1050, 1150, 1000, 950, 900],
           picked:false,
+          sound: "./assets/sound/bark.wav",
         },
 
         player:{
@@ -90,19 +99,10 @@
         },
         endedBattle: true,
         winner: false,
-        dead : {
-          url : "sounds/dead.wav"
-        },
-        ping : {
-          url : "sounds/ping.mp3",
-          volume : .5
-        }
+        inGame:false,
+        ready: false,
       }
     },
-    watch: {
-      
-    },
-
     methods: {
       battleEnd:function(){
         this.endedBattle = true
@@ -123,6 +123,8 @@
           if (this.cat.hp > 0 && this.dog.hp > 0){
             let catDamage = this.cat.damage - this.dog.defense
             this.dog.hp -= catDamage
+            var catSound = new Audio('./assets/sound/meow.wav') // path to file
+            catSound.play() 
             if(this.dog.hp <= 0){
               this.endedBattle = true
               this.dog.hp = 0
@@ -149,12 +151,15 @@
        betOnCat: function(){
         this.player.gold -= 5
         this.cat.picked = true
+        this.ready = true
       },
 
        betOnDog: function(){
          this.player.gold -= 5        
         this.dog.picked = true
         this.endedBattle = false
+        this.ready = true
+        
       },
       
 
@@ -172,6 +177,7 @@
                     console.log(err)
                 }
                 this.isPlaying = true
+                this.inGame = true
                 let randomDmg = this.cat.damage[Math.floor(Math.random() * this.cat.damage.length)];
                 let randomDefense = this.cat.defense[Math.floor(Math.random() * this.cat.defense.length)]
                 let randomHp = this.cat.hp[Math.floor(Math.random() * this.cat.hp.length)]
@@ -195,6 +201,7 @@
                 console.log(err)
               }
                 this.isPlaying = true
+                this.inGame = true
                 let randomDmg = this.dog.damage[Math.floor(Math.random() * this.dog.damage.length)];
                 let randomDefense = this.dog.defense[Math.floor(Math.random() * this.dog.defense.length)]
                 let randomHp = this.dog.hp[Math.floor(Math.random() * this.dog.hp.length)]
@@ -216,7 +223,7 @@
 
 <style scoped lang="css">
 .game {
-  height: 750px;
+  height: 920px;
   width: auto;
   margin-top: 55px;
   padding-top: 10px;
@@ -282,9 +289,11 @@ a:hover {
 }
 
 .playerStats p{
-  font-size: 18px;
-  color: black;
-  text-shadow: 2px 2px white;
+  color: #fff;
+  text-shadow: black 3px 3px;
+  font-weight: bolder;
+  font-size: 30px;
+  padding-top: 15px;
 }
 
 p {

@@ -104,7 +104,11 @@ export default {
 .navbar .navbar-brand,
 .nav-link {
   margin: 0px;
-  padding: 0px 15px;
+  padding: 0px 25px;
+}
+
+.navbar .nav-item li{
+  padding-right: 35px;
 }
 
 .navbar .navbar-brand {
