@@ -1,34 +1,33 @@
 <template lang="html">
-
   <section class="third-section">
     <div class="container">
-      <h1 class="text-left link"><router-link to="/aww" class="nav-link">Cats vs Dogs</router-link></h1>   
+      <h1 class="text-left link">
+        <router-link to="/aww" class="nav-link">Cats vs Dogs</router-link>
+      </h1>
     </div>
   </section>
-
 </template>
 
 <script lang="js">
-  export default  {
-    name: 'third-section',
-    props: [],
-    mounted() {
+export default  {
+  name: 'third-section',
+  props: [],
+  mounted() {
 
-    },
-    data() {
-      return {
+  },
+  data() {
+    return {
 
-      }
-    },
+    }
+  },
 
-    methods: {
-      
-    },
-    computed: {
+  methods: {
 
-    },
-  }
+  },
+  computed: {
 
+  },
+}
 </script>
 
 <style scoped lang="css">
@@ -42,7 +41,7 @@
   background-size: 75% auto;
 }
 
-.link a{
+.link a {
   color: #fff;
   text-shadow: black 3px 3px;
   font-weight: bolder;
@@ -52,18 +51,18 @@
   text-underline-position: under;
 }
 
-.link a:hover{
+.link a:hover {
   color: #ee76a5;
 }
 
-p{
+p {
   font-size: 18px;
   padding-top: 15px;
   padding-bottom: 15px;
   color: black;
 }
 
-.container{
+.container {
   width: 95%;
 }
 </style>

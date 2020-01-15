@@ -1,23 +1,38 @@
 <template lang="html">
-
   <section class="secondSection">
     <div class="container">
-    <div class="row">
-      <div class="text col">
-        <div class="row">
-        <h1>Having a tough day?</h1>
-        <h3>We all know that the toughest days require the cutest of cats. Check out our collection of extremely cute cats to get you trough the day</h3>
-        <button class="btn myFooter">Make me happy!</button>
+      <div class="row">
+        <div class="text col">
+          <div class="row">
+            <h1>Having a tough day?</h1>
+            <h3>
+              We all know that the toughest days require the cutest of cats.
+              Check out our collection of extremely cute cats to get you trough
+              the day
+            </h3>
+            <button class="btn myFooter">Make me happy!</button>
+          </div>
+          <img
+            id="pombo"
+            class="row d-none d-md-flex "
+            src="../assets/calopsita.png"
+            data-aos="flip-left"
+            data-aos-id="pombo"
+          />
         </div>
-        <img id="pombo" class="row d-none d-md-flex " src="../assets/calopsita.png" data-aos="flip-left" data-aos-id="pombo">
-      </div>
-      <div id="gato" class="col gato d-none d-md-flex " data-aos="fade-down-left" data-aos-duration="10000" data-aos-delay="500" data-aos-id="pombo">
-        <img src="../assets/cat.png">
-      </div>
+        <div
+          id="gato"
+          class="col gato d-none d-md-flex "
+          data-aos="fade-down-left"
+          data-aos-duration="10000"
+          data-aos-delay="500"
+          data-aos-id="pombo"
+        >
+          <img src="../assets/cat.png" />
+        </div>
       </div>
     </div>
   </section>
-
 </template>
 
 <script lang="js">
@@ -25,7 +40,7 @@
   export default  {
     name: 'secondSection',
     components: {
-      
+
     },
 
     props: [],

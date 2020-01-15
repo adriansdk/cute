@@ -4,11 +4,14 @@
       <div class="text d-flex flex-wrap">
         <div class="text-container col align-items-center">
           <h1 id="rainbow">End my misery!</h1>
-          <h3 >If you can't be bothered trying anymore, this is the perfect place to be. We'll help you relax with some cute fluffy faces!</h3>
+          <h3>
+            If you can't be bothered trying anymore, this is the perfect place
+            to be. We'll help you relax with some cute fluffy faces!
+          </h3>
           <button class="btn">Start out!</button>
         </div>
         <div class="col d-none d-lg-flex justify-content-end">
-          <img src="../assets/jobs.png">
+          <img src="../assets/jobs.png" />
         </div>
       </div>
     </div>
@@ -24,22 +27,15 @@
     data() {
       return {
         isHovering:false,
-
       }
     },
-    methods: {
-
-    },
-    computed: {
-
-    }
 }
 </script>
 
 <style scoped lang="css">
 .firstSection {
   height: 320px;
-  margin-top:55px;
+  margin-top: 55px;
   color: white;
   background-color: #265573;
   z-index: 1;
@@ -53,9 +49,9 @@
   transition: filter 1s, margin-top 1s;
 }
 
-.col{
-    max-height: 320px;
-    z-index: 2;
+.col {
+  max-height: 320px;
+  z-index: 2;
 }
 
 .firstSection h1 {
@@ -94,24 +90,22 @@
 .container {
   width: 95%;
   max-height: 320px;
-  
 }
 
-.img{
+.img {
   z-index: -1;
 }
 
-.container:hover img{
+.container:hover img {
   filter: grayscale(0%);
   margin-top: 10px;
-
 }
 
 @media only screen and (min-width: 900px) {
   .text-container {
     padding: 0px;
   }
-  .firstSection h1{
+  .firstSection h1 {
     padding-top: 60px;
   }
 }

@@ -1,9 +1,7 @@
 <template lang="html">
-
   <section class="myFooter">
-  
+    <h1>This is a footer</h1>
   </section>
-
 </template>
 
 <script lang="js">
@@ -15,23 +13,14 @@
     },
     data() {
       return {
-
       }
     },
-    methods: {
-
-    },
-    computed: {
-
-    }
 }
 </script>
 
 <style scoped lang="css">
-
-.myFooter{
+.myFooter {
   height: 200px;
   background-color: black;
 }
-
 </style>
